@@ -17,11 +17,11 @@ spec:
     helm:
       parameters:
         - name: image.tag
-          value: v1
+          value: v2
         - name: image.repository
           value: sobczykm/url-shortener
         - name: app.version
-          value: v1
+          value: v2
       valueFiles: []
       values: |
         replicaCount: 1
