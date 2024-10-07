@@ -9,7 +9,7 @@ spec:
     namespace: url-shortener
     server: https://kubernetes.default.svc
   source:
-    path: go-app
+    path: ./go-app
     repoURL: https://github.com/sobczykm/helm-charts
     targetRevision: main
     helm:
@@ -18,8 +18,6 @@ spec:
           value: v2
         - name: image.repository
           value: sobczykm/url-shortener
-        - name: app.version
-          value: v2
       valueFiles: []
       values: |
         replicaCount: 1
