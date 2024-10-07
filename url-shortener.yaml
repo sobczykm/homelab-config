@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    name: ''
+    name: url-shortener
     namespace: url-shortener
     server: https://kubernetes.default.svc
   source:
@@ -25,24 +25,6 @@ spec:
       valueFiles: []
       values: |
         replicaCount: 1
-        ingress:
-          enabled: false
-          annotations:
-            cert-manager.io/cluster-issuer: "letsencrypt-prod"
-            kubernetes.io/ingress.class: "nginx"
-            nginx.ingress.kubernetes.io/tls-acme: "true"
-            nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-            nginx.ingress.kubernetes.io/ssl-redirect: "true"
-          labels: {}
-          hosts:
-            - host: shortener.codebrew.cloud
-              paths:
-                - path: /
-                  pathType: Prefix
-          tls:
-            - hosts:
-                - shortener.codebrew.cloud
-              secretName: url-shortener
   project: default
   syncPolicy:
     automated:
