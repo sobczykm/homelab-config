@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: url-shortener
+  namespace: url-shortener
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: ''
+    namespace: url-shortener
+    server: https://kubernetes.default.svc
+  source:
+    path: go-app
+    repoURL: https://github.com/sobczykm/helm-charts
+    targetRevision: main
+    helm:
+      parameters:
+        - name: image.tag
+          value: v1
+        - name: image.repository
+          value: sobczykm/url-shortener
+        - name: app.version
+          value: v1
+      valueFiles: []
+      values: |
+        replicaCount: 1
+        ingress:
+          enabled: true
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-prod"
+            kubernetes.io/ingress.class: "nginx"
+            nginx.ingress.kubernetes.io/tls-acme: "true"
+            nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+            nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          labels: {}
+          hosts:
+            - host: shortener.codebrew.cloud
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - hosts:
+                - shortener.codebrew.cloud
+              secretName: url-shortener
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
