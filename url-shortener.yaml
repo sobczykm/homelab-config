@@ -5,7 +5,7 @@ metadata:
   namespace: url-shortener
 spec:
   destination:
-    name: url-shortener
+    name: ''
     namespace: url-shortener
     server: https://kubernetes.default.svc
   source:
@@ -18,9 +18,29 @@ spec:
           value: v2
         - name: image.repository
           value: sobczykm/url-shortener
+        - name: app.version
+          value: v2
       valueFiles: []
       values: |
         replicaCount: 1
+        ingress:
+          enabled: true
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-prod"
+            kubernetes.io/ingress.class: "nginx"
+            nginx.ingress.kubernetes.io/tls-acme: "true"
+            nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+            nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          labels: {}
+          hosts:
+            - host: 192.168.0.200
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - hosts:
+                - 192.168.0.200
+              secretName: url-shortener
   project: default
   syncPolicy:
     automated:
