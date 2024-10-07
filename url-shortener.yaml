@@ -9,8 +9,8 @@ spec:
     namespace: url-shortener
     server: https://kubernetes.default.svc
   source:
-    path: ./go-app
-    repoURL: https://github.com/sobczykm/helm-charts
+    path: charts/nh-frontend
+    repoURL: https://github.com/nethopper2/helm-charts
     targetRevision: main
     helm:
       parameters:
