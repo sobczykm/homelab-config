@@ -23,15 +23,12 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
-                  backend:
-                    service:
-                      name: n8n
-                      port:
-                        number: 5678
           tls:
             - secretName: n8n-tls
               hosts:
                 - n8n.codebrew.cloud
+        service:
+          port: 5678
   destination:
     server: https://kubernetes.default.svc
     namespace: n8n
