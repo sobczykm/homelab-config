@@ -20,7 +20,6 @@ spec:
             - host: n8n.codebrew.cloud
               paths:
                 - path: /
-                  pathType: Prefix
   destination:
     server: https://kubernetes.default.svc
     namespace: n8n
