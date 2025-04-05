@@ -25,8 +25,7 @@ spec:
           hosts:
             - host: n8n.codebrew.cloud
               paths:
-                - path: /
-                  pathType: Prefix
+                - /
           tls:
             - hosts:
                 - n8n.codebrew.cloud
