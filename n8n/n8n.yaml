@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "8gears.container-registry.com/library/n8n"
+    repoURL: "https://8gears.container-registry.com/library/n8n"
     chart: n8n
     targetRevision: "1.0.6"
     helm:
@@ -19,7 +19,8 @@ spec:
           hosts:
             - host: n8n.codebrew.cloud
               paths:
-                - /
+                - path: /
+                  pathType: ImplementationSpecific
   destination:
     server: https://kubernetes.default.svc
     namespace: n8n
