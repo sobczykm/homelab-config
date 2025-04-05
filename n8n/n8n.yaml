@@ -31,8 +31,8 @@ spec:
                 - n8n.codebrew.cloud
               secretName: n8n-tls
         extraEnv:
-          - name: WEBHOOK_URL
-            value: n8n.codebrew.cloud
+          WEBHOOK_URL:
+            value: "https://n8n.codebrew.cloud"
   destination:
     server: https://kubernetes.default.svc
     namespace: n8n
