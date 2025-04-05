@@ -26,6 +26,7 @@ spec:
             - host: n8n.codebrew.cloud
               paths:
                 - path: /
+                  port: 5678
                   pathType: ImplementationSpecific
           tls:
             - hosts:
