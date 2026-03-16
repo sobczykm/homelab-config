@@ -10,3 +10,6 @@ prometheus:
 
 alertmanager:
   enabled: true
+
+crds:
+  enabled: true
