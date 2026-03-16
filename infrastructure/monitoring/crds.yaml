@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: monitoring
+  name: prometheus-crds
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: default
   source:
@@ -12,11 +12,11 @@ spec:
     chart: kube-prometheus-stack
     targetRevision: 58.3.1
     helm:
-      valueFiles:
-      - values.yaml
       parameters:
-      - name: crds.enabled
-        value: "false"
+        - name: crds.enabled
+          value: "true"
+        - name: prometheus.enabled
+          value: "false"
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
@@ -24,5 +24,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
